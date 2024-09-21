@@ -12,7 +12,7 @@ const p = document.createElement('p');
 
 let prevGuess = [];
 
-let numGuesses = 0;
+let numGuesses = 1;
 
 let playGame = true;
 
@@ -37,7 +37,7 @@ function validateGuess(guess){
         displayMsg('');
         prevGuess.push(guess);
         
-        if(numGuesses === 11 && guess !== randomNum){
+        if(numGuesses === 10){
             displayGuess(guess);
             displayMsg(`Game over. Random number was, ${randomNum}`);
             endGame();
@@ -62,6 +62,14 @@ function checkGuess(guess){
 function displayGuess(guess) {
     userInput.value = '';
     guessSlot.innerHTML += `${guess}  `;
+
+    function guessesStyle (){
+        guessSlot.style.backgroundColor = '#777';
+        guessSlot.style.padding = '7px';
+        guessSlot.style.borderRadius = '5px'
+    }
+
+    guessesStyle();
     numGuesses++;
     remaining.innerHTML = `${11 - numGuesses}`;
 }
@@ -69,9 +77,13 @@ function displayGuess(guess) {
 function displayMsg(message) {
     lowHigh.innerHTML = `<h2>${message}</h2>`;
 
-    lowHigh.style.padding = '10px';
-    lowHigh.style.backgroundColor = '#777';
-    lowHigh.style.borderRadius = '5px';
+    function lowHighStyle() {
+        lowHigh.style.padding = '10px';
+        lowHigh.style.backgroundColor = '#777';
+        lowHigh.style.borderRadius = '5px';
+    }
+
+    lowHighStyle();
 }
 
 function endGame(){
@@ -97,8 +109,9 @@ function newGame() {
         console.log(randomNum);
         
         prevGuess = [];
-        numGuesses = 0;
+        numGuesses = 1;
         guessSlot.innerHTML = '';
+        guessSlot.style = '';
         remaining.innerHTML = `${11 - numGuesses}`;
         userInput.removeAttribute('disabled');
         startOver.removeChild(p);
