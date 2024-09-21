@@ -61,7 +61,7 @@ function checkGuess(guess){
 
 function displayGuess(guess) {
     userInput.value = '';
-    guessSlot.innerHTML += `${guess}  `;
+    guessSlot.innerHTML += `|${guess}| `;
 
     function guessesStyle (){
         guessSlot.style.backgroundColor = '#777';
